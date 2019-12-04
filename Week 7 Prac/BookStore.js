@@ -57,7 +57,7 @@ class BookStore
             { // This is for when the book is NOT already available.
                  let bookCopies = {
                      book: bookInstance,
-                     copies: copies
+                     copies: copies 
                  };
                  this._booksAvailable.push(bookCopies);
                  console.log("Added " + copies + " copies of a new book: " + bookInstance);
@@ -172,7 +172,7 @@ class Book
     // Checks and returns whether or not otherBook's price is the same as the book that is calling it
     isTheSame(otherBook)
     {
-        return otherBook.price === this.price;
+        return otherBook.title === this.title;
     }
 
     // Accessors and Mutators
