@@ -51,7 +51,10 @@ class BookStore
                  let foundBook = this._booksAvailable[positionOfBook];
                  foundBook.copies += copies;
                  console.log("Added " + copies + " copies of " + foundBook.book);
-                 listOfAllKnownAuthors.push(foundBook.book.author);
+                 if (authorKnown(foundBook.book.author) === false)
+                     {
+                         listOfAllKnownAuthors.push(foundBook.book.author)
+                     }
             }
             else
             { // This is for when the book is NOT already available.
@@ -76,7 +79,6 @@ class BookStore
         if (positionOfBook != null)
         {
             let foundBook = this._booksAvailable[positionOfBook];
-            console.log(numberSold)
             if (numberSold > this._booksAvailable[positionOfBook].copies || 1 > numberSold)
             {
                 console.log("Not enough copies of " + foundBook.book + " to sell");
@@ -111,10 +113,6 @@ class BookStore
             if (this._booksAvailable[currBookNum].book.isTheSame(bookInstance))
             {
                 return currBookNum;
-            }
-            else
-            {
-                return null;
             }
             currBookNum += 1;
         }
