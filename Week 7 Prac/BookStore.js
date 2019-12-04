@@ -25,7 +25,7 @@ class BookStore
     }
     
     //Public Methods
-
+    // Checks to see if authorName is in listOfAllKnownAuthors
     authorKnown(authorName)
     {
         let foundThem = false;
@@ -38,11 +38,12 @@ class BookStore
         }
         return foundThem
     }
-
+    
+    // Adds a new book, and makes appropriate changes to other variables/arrays.
     addBook(bookInstance, copies)
     {
         let positionOfBook = this.checkForBook(bookInstance);
-        if (positionOfBook != null)
+        if (positionOfBook != null) // This is for when the book is already available.
         {
              let foundBook = this._booksAvailable[positionOfBook];
              foundBook.copies += copies;
@@ -50,7 +51,7 @@ class BookStore
              listOfAllKnownAuthors.push(foundBook.book.author);
         }
         else
-        {
+        { // This is for when the book is NOT already available.
              let bookCopies = {
                  book: bookInstance,
                  copies: copies
@@ -75,7 +76,8 @@ class BookStore
             else
             {
                 foundBook.copies -= numberSold;
-                if (foundBook.copies === 0)
+                if (foundBook.copies === 0) // If there are no copies of a book left, it removes the book 
+                                            // and its details from all relevant arrays.
                 {
                     this._booksAvailable.pop(PositionOfBook);
                     this._NumTitles -= 1;
