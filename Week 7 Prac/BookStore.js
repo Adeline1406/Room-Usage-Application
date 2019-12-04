@@ -167,20 +167,6 @@ class Book
         return otherBook.price === this.price;
     }
 
-    // Checks to see if authorName is in listOfAllKnownAuthors
-    authorKnown(authorName)
-    {
-        let foundThem = false;
-        for (let pos = 0; pos < listOfAllKnownAuthors.length; pos++)
-        {
-            if (authorName === listOfAllKnownAuthors[pos])
-            {
-                foundThem = true;
-            }
-        }
-        return foundThem;
-    }
-
     // Accessors and Mutators
     get title()
     {
