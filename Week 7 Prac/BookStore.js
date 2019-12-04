@@ -72,10 +72,10 @@ class BookStore
         if (positionOfBook != null)
         {
             let foundBook = this._booksAvailable[positionOfBook];
-            if (numberSold > this._booksAvailable[positionOfBook].copies)
+            if (numberSold > this._booksAvailable[positionOfBook].copies || 1 > numberSold)
             {
                 console.log("Not enough copies of " + foundBook.book + " to sell");
-            }
+            } 
             else
             {
                 foundBook.copies -= numberSold;
