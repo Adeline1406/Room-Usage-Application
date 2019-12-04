@@ -1,15 +1,20 @@
 let listOfAllKnownAuthors = []
 
+// Class Definitions
+
 class BookStore
 {
     constructor(name, address, owner)
     {
+        //Private Attributes
         this._name = name;
         this._address = address;
         this._owner = owner;
         this._booksAvailable = [];
         this._totalCopiesOfAllBooks = 0
     }
+    
+    //Public Methods
 
     authorKnown(authorName)
     {
@@ -97,7 +102,7 @@ class BookStore
 
     get name()
     {
-        return this._name;
+        return this._name; // ret
     }
 
     set name(newName)
@@ -130,6 +135,7 @@ class Book
 {
     constructor(title, author, publicationYear, price)
     {
+        //Private attributes
         this._title = title;
         this._author = author;
         this._publicationYear = publicationYear;
@@ -139,6 +145,8 @@ class Book
             listOfAllKnownAuthors.push(this._author)
         }
     }
+    
+    //Public Methods
 
     isTheSame(otherBook)
     {
