@@ -84,7 +84,7 @@ class BookStore
                 {
                     this._booksAvailable.pop(PositionOfBook);
                     this._NumTitles -= 1;
-                    let foundAuth = this.authorKnown(foundBook.book.author);
+                    let foundAuth = authorKnown(foundBook.book.author);
                     listOfAllKnownAuthors.pop(foundAuth);
                 }
                 this._totalCopiesOfAllBooks -= numberSold;
@@ -157,7 +157,7 @@ class Book
         this._author = author;
         this._publicationYear = publicationYear;
         this._price = price;
-        if (this.authorKnown(this._author) === false)
+        if (authorKnown(this._author) === false)
         {
             listOfAllKnownAuthors.push(this._author)
         }
