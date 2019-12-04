@@ -1,6 +1,6 @@
 /**
  * Filename: BookStore.js
- * Authors: Adeline Soerjonoto and Michael Abdelmessih
+ * Authors: Adeline Soerjonoto, Jason Yonothan and Michael Abdelmessih
  * Lab Time: 2:30pm - 6pm on Friday
  * Lab Teacher: Hongli Song
  * Date Created: 4/12/19
@@ -94,6 +94,7 @@ class BookStore
         }
     }
 
+    // Checks if a book (bookInstance) is available and returns its position in the _booksAvailable array.
     checkForBook(bookInstance)
     {
         let currBookNum = 0;
