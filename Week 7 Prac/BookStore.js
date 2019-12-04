@@ -10,6 +10,20 @@
 
 let listOfAllKnownAuthors = []
 
+// Checks to see if authorName is in listOfAllKnownAuthors
+function authorKnown(authorName)
+{
+    let foundThem = false;
+    for (let pos = 0; pos < listOfAllKnownAuthors.length; pos++)
+    {
+        if (authorName === listOfAllKnownAuthors[pos])
+        {
+            foundThem = true
+        }
+    }
+    return foundThem
+}
+
 // Class Definitions
 
 class BookStore
@@ -25,19 +39,7 @@ class BookStore
     }
     
     // Public Methods
-    // Checks to see if authorName is in listOfAllKnownAuthors
-    authorKnown(authorName)
-    {
-        let foundThem = false;
-        for (let pos = 0; pos < listOfAllKnownAuthors.length; pos++)
-        {
-            if (authorName === listOfAllKnownAuthors[pos])
-            {
-                foundThem = true
-            }
-        }
-        return foundThem
-    }
+
     
     // Adds a new book, and makes appropriate changes to other variables/arrays.
     addBook(bookInstance, copies)
