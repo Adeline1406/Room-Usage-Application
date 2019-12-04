@@ -44,25 +44,29 @@ class BookStore
     // Adds a new book, and makes appropriate changes to other variables/arrays.
     addBook(bookInstance, copies)
     {
-        let positionOfBook = this.checkForBook(bookInstance);
-        if (positionOfBook != null) // This is for when the book is already available.
-        {
-             let foundBook = this._booksAvailable[positionOfBook];
-             foundBook.copies += copies;
-             console.log("Added " + copies + " copies of " + foundBook.book);
-             listOfAllKnownAuthors.push(foundBook.book.author);
-        }
-        else
-        { // This is for when the book is NOT already available.
-             let bookCopies = {
-                 book: bookInstance,
-                 copies: copies
-             };
-             this._booksAvailable.push(bookCopies);
-             console.log("Added " + copies + " copies of a new book: " + bookInstance);
-        }
+        if (1 > copies) {
+            let positionOfBook = this.checkForBook(bookInstance);
+            if (positionOfBook != null) // This is for when the book is already available.
+            {
+                 let foundBook = this._booksAvailable[positionOfBook];
+                 foundBook.copies += copies;
+                 console.log("Added " + copies + " copies of " + foundBook.book);
+                 listOfAllKnownAuthors.push(foundBook.book.author);
+            }
+            else
+            { // This is for when the book is NOT already available.
+                 let bookCopies = {
+                     book: bookInstance,
+                     copies: copies
+                 };
+                 this._booksAvailable.push(bookCopies);
+                 console.log("Added " + copies + " copies of a new book: " + bookInstance);
+            }
 
-        this._totalCopiesOfAllBooks += copies;
+            this._totalCopiesOfAllBooks += copies;
+        } else {
+            console.log(bookInstance + " cannot be added when copies is less than 1!")
+        }
     }
 
     // Processes the selling of a book and how it affects other variables/lists
@@ -72,6 +76,7 @@ class BookStore
         if (positionOfBook != null)
         {
             let foundBook = this._booksAvailable[positionOfBook];
+            console.log(numberSold)
             if (numberSold > this._booksAvailable[positionOfBook].copies || 1 > numberSold)
             {
                 console.log("Not enough copies of " + foundBook.book + " to sell");
