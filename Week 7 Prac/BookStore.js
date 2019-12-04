@@ -63,6 +63,7 @@ class BookStore
         this._totalCopiesOfAllBooks += copies;
     }
 
+    // Processes the selling of a book and how it affects other variables/lists
     sellBook(bookInstance, numberSold)
     {
         let positionOfBook = this.checkForBook(bookInstance);
