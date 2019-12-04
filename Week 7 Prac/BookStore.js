@@ -16,7 +16,7 @@ class BookStore
 {
     constructor(name, address, owner)
     {
-        //Private Attributes
+        // Private Attributes
         this._name = name;
         this._address = address;
         this._owner = owner;
@@ -24,7 +24,7 @@ class BookStore
         this._totalCopiesOfAllBooks = 0
     }
     
-    //Public Methods
+    // Public Methods
     // Checks to see if authorName is in listOfAllKnownAuthors
     authorKnown(authorName)
     {
@@ -113,9 +113,10 @@ class BookStore
         return null;
     }
 
+    // Accessors and Mutators
     get name()
     {
-        return this._name; // ret
+        return this._name;
     }
 
     set name(newName)
@@ -148,7 +149,7 @@ class Book
 {
     constructor(title, author, publicationYear, price)
     {
-        //Private attributes
+        // Private attributes
         this._title = title;
         this._author = author;
         this._publicationYear = publicationYear;
@@ -159,13 +160,14 @@ class Book
         }
     }
     
-    //Public Methods
-
+    // Public Methods
+    // Checks and returns whether or not otherBook's price is the same as the book that is calling it
     isTheSame(otherBook)
     {
         return otherBook.price === this.price;
     }
 
+    // Checks to see if authorName is in listOfAllKnownAuthors
     authorKnown(authorName)
     {
         let foundThem = false;
@@ -179,6 +181,7 @@ class Book
         return foundThem;
     }
 
+    // Accessors and Mutators
     get title()
     {
         return this._title;
@@ -198,7 +201,8 @@ class Book
     {
         return this._price;
     }
-
+    
+    // Serialiser
     toString()
     {
         return this.title + ", " + this.author + ". " + this.publicationYear + " ($" + this.price + ")";
