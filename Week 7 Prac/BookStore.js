@@ -44,7 +44,7 @@ class BookStore
     // Adds a new book, and makes appropriate changes to other variables/arrays.
     addBook(bookInstance, copies)
     {
-        if (1 > copies) {
+        if (copies > 0) {
             let positionOfBook = this.checkForBook(bookInstance);
             if (positionOfBook != null) // This is for when the book is already available.
             {
