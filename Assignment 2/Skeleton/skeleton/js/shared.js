@@ -2,27 +2,14 @@
 
 class RoomUsage
 {
-    constructor(roomNumber, address, lightsOn, heatingCoolingOn, seatUsed, seatTotal, timeChecked) {
-        if (typeof(roomNumber) === "string" && roomNumber !== ""){
-            this._roomNumber = roomNumber;
-        }
-        if (typeof(address) === "string" && address !== ""){
-            this._address = address;
-        }
-        if (typeof(lightsOn) === 'boolean'){
-            this._lightsOn = lightsOn;
-        }
+    constructor(roomNumber, address, lightsOn, heatingCoolingOn, seatsUsed, seatsTotal, timeChecked) {
         
-        if (typeof(heatingCoolingOn)==="boolean"){
-            this._heatingCoolingOn = heatingCoolingOn;
-        }
-        if (typeof(seatUsed)==="number" && seatUsed >0 && seatUsed < seatTotal){
-            this._seatsUsed = seatUsed;
-        }
-        
-        if(typeof(seatTotal) === "number" && seatTotal > 0){
-            this._seatsTotal = seatTotal;
-        }
+        this._roomNumber = roomNumber;
+        this._address = address;
+        this._lightsOn = lightsOn;
+        this._heatingCoolingOn = heatingCoolingOn;
+        this._seatsUsed = seatsUsed;
+        this._seatsTotal = seatsTotal;
         this._timeChecked = timeChecked;
         
     }
