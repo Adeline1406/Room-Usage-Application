@@ -66,3 +66,44 @@ function saveForm(){
         
 
 }
+
+let posOptions = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0
+};
+
+function posSuccess(userPosition){
+    let latitude = userPosition.coords.latitude
+    let longitude = userPosition.coords.longitude
+    let apiURL = "https://api.opencagedata.com/geocode/v1/json?key=2705e58f3a424ef2ae45adeb3faeadf2"
+    let requestURL = apiURL
+    + "&q=" + encodeURIComponent(latitude + "," + longitude)
+    + "&pretty=1&no_annotations=1&jsonp=callbackFunctionName"
+    
+    let newRequest = new XMLHttpRequest();
+    newRequest.open("GET", requestURL, true)
+    newRequest.onload = function() {
+        if (newRequest.status == 200) {
+            
+        } else if (newRequest.status <= 500) {
+            
+        } else {
+            console.log("Opencagedata server error!")
+        }
+    
+    }
+    
+    document.getElementById("address").value = 
+}
+
+function posError(userError){
+    console.log("There is an error with getCurrentPosition()!")
+}
+
+function getAddressCheck(){
+    let checkbox = document.getElementById("useAddress");
+    if (checkbox.checked == true){
+        navigator.geolocation.watchPosition(posSuccess, posError, posOptions)
+    }
+}

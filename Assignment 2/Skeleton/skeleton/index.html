@@ -43,7 +43,8 @@
                                     <tr>
                                         <td>
                                             <div class="mdl-textfield mdl-js-textfield">
-                                                <input class="mdl-textfield__input" type="text" id="address">
+                                                <!-- Pattern reference: https://zellwk.com/blog/check-empty-input-css/ -->
+                                                <input class="mdl-textfield__input" type="text" id="address" pattern = ".*\S.*">
                                                 <label class="mdl-textfield__label" for="address">Building address...</label>
                                             </div>
                                         </td>
@@ -51,7 +52,7 @@
                                     <tr>
                                         <td>
                                             <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="useAddress">
-                                                <input type="checkbox" id="useAddress" class="mdl-checkbox__input">
+                                                <input type="checkbox" id="useAddress" class="mdl-checkbox__input" onclick="getAddressCheck()">
                                                 <span class="mdl-checkbox__label">Automatically determine my address</span>
                                             </label>
                                         </td>
