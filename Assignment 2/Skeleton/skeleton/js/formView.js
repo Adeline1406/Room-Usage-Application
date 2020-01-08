@@ -27,13 +27,13 @@ function saveForm(){
         var chkAddress = address;
     }
     else{
-        error += "Adress, ";    
+        error += "Address, ";    
     }
     if (typeof(lightsOn) === 'boolean'){
         var chkLightsOn = lightsOn;
     }
     else{
-        error += "Ligths, ";
+        error += "Lights, ";
     }
     if (typeof(heatingCoolingOn)==="boolean"){
         var chkHeatingCoolingOn = heatingCoolingOn;
