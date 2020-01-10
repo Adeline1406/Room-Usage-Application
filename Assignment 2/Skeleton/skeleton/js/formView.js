@@ -14,6 +14,7 @@ function clearForm(){
 }
 
 function saveForm(){
+    
     let error = "Error in ";
     let roomNumber = document.getElementById("roomNumber").value;
     let address = document.getElementById("address").value;
@@ -70,7 +71,6 @@ function saveForm(){
         document.getElementById("errorMessages").innerHTML += error;
     }
         
-
 }
 
 // This function uses modified code from OpenCageData's Javascript tutorial. Source: https://opencagedata.com/tutorials/geocode-in-javascript
@@ -104,9 +104,9 @@ function posSuccess(userPosition){
     
     }
     
+    }
     newRequest.onerror = function() {
         console.log("Unable to connect to server!")
-    }
     
     newRequest.send()
     
