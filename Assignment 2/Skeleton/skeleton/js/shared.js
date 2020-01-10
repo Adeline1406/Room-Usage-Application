@@ -50,10 +50,8 @@ function storeRoomUsage(){
 
 function retrieveRoomUsage(){
     if (typeof(Storage) !== "undefined"){
-        var roomUsageObject = JSON.parse(localStorage.getItem(STORAGE_KEY));
         
-        console.log(roomUsageInstance);
-        document.getElementById("outputArea").innerHTML = roomUsageInstance;
+        document.getElementById("outputArea").innerHTML = localStorage.getItem(roomUsageInstance);
 
     }
     else{

@@ -8,6 +8,7 @@ function clearForm(){
 }
 
 function saveForm(){
+    
     let error = "Error in ";
     let roomNumber = document.getElementById("roomNumber").value;
     let address = document.getElementById("address").value;
@@ -64,7 +65,6 @@ function saveForm(){
         document.getElementById("errorMessages").innerHTML += error;
     }
         
-
 }
 
 let posOptions = {
@@ -94,7 +94,7 @@ function posSuccess(userPosition){
     
     }
     
-    document.getElementById("address").value = 
+    //document.getElementById("address").value = 
 }
 
 function posError(userError){
