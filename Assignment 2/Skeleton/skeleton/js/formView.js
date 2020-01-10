@@ -1,5 +1,11 @@
 "use strict";
 
+let posOptions = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0
+};
+
 function clearForm(){
     document.getElementById("roomNumber").value = "";
     document.getElementById("address").value = "";
@@ -67,17 +73,14 @@ function saveForm(){
 
 }
 
-let posOptions = {
-    enableHighAccuracy: true,
-    timeout: 5000,
-    maximumAge: 0
-};
-
+// This function uses modified code from OpenCageData's Javascript tutorial. Source: https://opencagedata.com/tutorials/geocode-in-javascript
 function posSuccess(userPosition){
     let latitude = userPosition.coords.latitude
     let longitude = userPosition.coords.longitude
-    let apiURL = "https://api.opencagedata.com/geocode/v1/json?key=2705e58f3a424ef2ae45adeb3faeadf2"
+    let apiKey = "2705e58f3a424ef2ae45adeb3faeadf2"
+    let apiURL = "https://api.opencagedata.com/geocode/v1/json?key="
     let requestURL = apiURL
+    + apiKey
     + "&q=" + encodeURIComponent(latitude + "," + longitude)
     + "&pretty=1&no_annotations=1&jsonp=callbackFunctionName"
     
@@ -85,13 +88,19 @@ function posSuccess(userPosition){
     newRequest.open("GET", requestURL, true)
     newRequest.onload = function() {
         if (newRequest.status == 200) {
-            
+            let newData = JSON.parse(request.responseText)
+            console.log(newData)
         } else if (newRequest.status <= 500) {
+            console.log("OpenCageData server returned an error! Error code: " + newRequest.status)
             
         } else {
-            console.log("Opencagedata server error!")
+            console.log("OpenCageData unknown server error!")
         }
     
+    }
+    
+    let newRequest.onerror() {
+        console.log("Unable to connect to server!")
     }
     
     document.getElementById("address").value = 
