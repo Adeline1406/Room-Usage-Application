@@ -66,6 +66,12 @@ function saveForm(){
     if (error ===  "Error in " ){
         let newRoomUsage = new RoomUsage(chkRoomNumber, chkAddress, chkLightsOn, chkHeatingCoolingOn, chkSeatsUsed, chkSeatsTotal, timeChecked);
         console.log(newRoomUsage);
+        let roomUsageList = new RoomUsageList();
+        
+        roomUsageList.addRoomUsage(newRoomUsage);
+        console.log(roomUsageList);
+        storeRoomUsage(newRoomUsage);
+        
     }
     else {
         document.getElementById("errorMessages").innerHTML += error;
