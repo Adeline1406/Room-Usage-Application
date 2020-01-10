@@ -82,14 +82,19 @@ function posSuccess(userPosition){
     let requestURL = apiURL
     + apiKey
     + "&q=" + encodeURIComponent(latitude + "," + longitude)
-    + "&pretty=1&no_annotations=1&jsonp=callbackFunctionName"
+    + "&pretty=1&no_annotations=1"
     
+    // If we have time, update to use jsonp
     let newRequest = new XMLHttpRequest();
     newRequest.open("GET", requestURL, true)
     newRequest.onload = function() {
         if (newRequest.status == 200) {
-            let newData = JSON.parse(request.responseText)
+            let newData = JSON.parse(newRequest.responseText)
             console.log(newData)
+            console.log(newData.results[0].formatted)
+            document.getElementById("address").value = "" // try to update to remove label in input field
+            document.getElementById("address").value = newData.results[0].formatted
+            document.getElementById("address").innerHTML = ""
         } else if (newRequest.status <= 500) {
             console.log("OpenCageData server returned an error! Error code: " + newRequest.status)
             
@@ -99,11 +104,12 @@ function posSuccess(userPosition){
     
     }
     
-    let newRequest.onerror() {
+    newRequest.onerror = function() {
         console.log("Unable to connect to server!")
     }
     
-    document.getElementById("address").value = 
+    newRequest.send()
+    
 }
 
 function posError(userError){
