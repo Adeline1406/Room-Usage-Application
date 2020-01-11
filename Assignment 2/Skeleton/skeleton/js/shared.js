@@ -21,24 +21,28 @@ class RoomUsageList
     constructor()
     {
         this._roomList = [];
+        
+        //for (let a = 0; a <= RoomUsage.length; )
+        //this._roomList.push(new RoomUsage(roomNumber, address, lightsOn, heatingCoolingOn, seatsUsed, seatsTotal, timeChecked));
     }
     
-    addRoomUsage(roomUsage){
-        roomList.push(roomUsage);
+    addRoomUsage(roomUsageInstance)
+    {
+        this._roomList.push(roomUsageInstance);
+        
+        return this._roomList;
     }
 
 }
 
-const STORAGE_KEY = 'ENG1003-RoomUseList'
-let roomUsageInstance = new RoomUsage();
+const STORAGE_KEY = 'ENG1003 - RoomUseList'
 let roomUsageInstanceList = new RoomUsageList();
 
-function storeRoomUsage(){
+function storeRoomUsage(roomUsageInstanceList){
     if (typeof(Storage) !== "undefined"){
         
-        roomUsageInstanceList.addRoomUsage(roomUsageInstance);
-        window.localStorage.setItem(STORAGE_KEY,roomUsageInstance);
-        displayMessage('Room Usage Instance stored.',3000);
+        let lst = JSON.stringify(roomUsageInstanceList)
+        window.localStorage.setItem(STORAGE_KEY,lst);
         
     }
     else{

@@ -66,10 +66,10 @@ function saveForm(){
     if (error ===  "Error in " ){
         let newRoomUsage = new RoomUsage(chkRoomNumber, chkAddress, chkLightsOn, chkHeatingCoolingOn, chkSeatsUsed, chkSeatsTotal, timeChecked);
         console.log(newRoomUsage);
-        let roomUsageList = new RoomUsageList();
         
-        roomUsageList.addRoomUsage(newRoomUsage);
-        console.log(roomUsageList);
+        roomUsageInstanceList.addRoomUsage(newRoomUsage);
+        console.log(roomUsageInstanceList);
+        
         storeRoomUsage(newRoomUsage);
         
     }
@@ -115,6 +115,7 @@ function posSuccess(userPosition) {
     }
     newRequest.send()
 }
+
 
 function posError(userError) {
     console.log("There is an error with getCurrentPosition()!")
