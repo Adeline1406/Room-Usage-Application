@@ -1,5 +1,11 @@
 "use strict";
 
+let posOptions = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0
+};
+
 function clearForm(){
     document.getElementById("roomNumber").value = "";
     document.getElementById("address").value = "";
@@ -60,6 +66,12 @@ function saveForm(){
     if (error ===  "Error in " ){
         let newRoomUsage = new RoomUsage(chkRoomNumber, chkAddress, chkLightsOn, chkHeatingCoolingOn, chkSeatsUsed, chkSeatsTotal, timeChecked);
         console.log(newRoomUsage);
+        
+        roomUsageInstanceList.addRoomUsage(newRoomUsage);
+        console.log(roomUsageInstanceList);
+        
+        storeRoomUsage(newRoomUsage);
+        
     }
     else {
         document.getElementById("errorMessages").innerHTML += error;
@@ -67,43 +79,51 @@ function saveForm(){
         
 }
 
-let posOptions = {
-    enableHighAccuracy: true,
-    timeout: 5000,
-    maximumAge: 0
-};
-
-function posSuccess(userPosition){
+// This function uses modified code from OpenCageData's Javascript tutorial. Source: https://opencagedata.com/tutorials/geocode-in-javascript
+function posSuccess(userPosition) {
     let latitude = userPosition.coords.latitude
     let longitude = userPosition.coords.longitude
-    let apiURL = "https://api.opencagedata.com/geocode/v1/json?key=2705e58f3a424ef2ae45adeb3faeadf2"
+    let apiKey = "2705e58f3a424ef2ae45adeb3faeadf2"
+    let apiURL = "https://api.opencagedata.com/geocode/v1/json?key="
     let requestURL = apiURL
+    + apiKey
     + "&q=" + encodeURIComponent(latitude + "," + longitude)
-    + "&pretty=1&no_annotations=1&jsonp=callbackFunctionName"
+    + "&pretty=1&no_annotations=1"
     
+    // If we have time, update to use jsonp
     let newRequest = new XMLHttpRequest();
     newRequest.open("GET", requestURL, true)
+    
     newRequest.onload = function() {
         if (newRequest.status == 200) {
-            
+            let newData = JSON.parse(newRequest.responseText)
+            console.log(newData)
+            console.log(newData.results[0].formatted)
+            console.log(document.getElementById("address"))
+            document.getElementById("address").value = newData.results[0].formatted
+            document.getElementById("address")[0] = "" // try to update to remove label in input field
         } else if (newRequest.status <= 500) {
+            console.log("OpenCageData server returned an error! Error code: " + newRequest.status)
             
         } else {
-            console.log("Opencagedata server error!")
+            console.log("OpenCageData unknown server error!")
         }
-    
     }
     
-    //document.getElementById("address").value = 
+    newRequest.onerror = function() {
+        console.log("Unable to connect to server!")
+    }
+    newRequest.send()
 }
 
-function posError(userError){
+
+function posError(userError) {
     console.log("There is an error with getCurrentPosition()!")
 }
 
 function getAddressCheck(){
     let checkbox = document.getElementById("useAddress");
-    if (checkbox.checked == true){
+    if (checkbox.checked == true) {
         navigator.geolocation.watchPosition(posSuccess, posError, posOptions)
     }
 }
