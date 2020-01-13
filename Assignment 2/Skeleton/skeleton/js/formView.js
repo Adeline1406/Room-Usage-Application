@@ -70,7 +70,7 @@ function saveForm(){
         roomUsageInstanceList.addRoomUsage(newRoomUsage);
         console.log(roomUsageInstanceList);
         
-        storeRoomUsage(newRoomUsage);
+        storeRoomUsage(roomUsageInstanceList);
         
     }
     else {
