@@ -1,10 +1,19 @@
 "use strict";
 
+if (localStorage.getItem(STORAGE_KEY) === null){
+    roomUsageInstanceList = new RoomUsageList();
+}
+else{
+    retrieveRoomUsage();
+}
+
+
 let posOptions = {
     enableHighAccuracy: true,
     timeout: 5000,
     maximumAge: 0
 };
+
 
 function clearForm(){
     document.getElementById("roomNumber").value = "";
@@ -65,7 +74,6 @@ function saveForm(){
     
     if (error ===  "Error in " ){
         let newRoomUsage = new RoomUsage(chkRoomNumber, chkAddress, chkLightsOn, chkHeatingCoolingOn, chkSeatsUsed, chkSeatsTotal, timeChecked);
-        console.log(newRoomUsage);
         
         roomUsageInstanceList.addRoomUsage(newRoomUsage);
         console.log(roomUsageInstanceList);

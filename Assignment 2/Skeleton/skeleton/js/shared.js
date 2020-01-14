@@ -13,6 +13,18 @@ class RoomUsage
         this._timeChecked = timeChecked;
         
     }
+    
+    initialiseFromRoomPDO(roomUsageObject){
+        
+        this._roomNumber = roomUsageObject._roomNumber;
+        this._address = roomUsageObject._address;
+        this._lightsOn = roomUsageObject._lightsOn;
+        this._heatingCoolingOn = roomUsageObject._heatingCoolingOn;
+        this._seatsUsed = roomUsageObject._seatsUsed;
+        this._seatsTotal = roomUsageObject._seatsTotal;
+        this._timeChecked = roomUsageObject._timeChecked;
+        
+    }
 
 }
 
@@ -22,18 +34,27 @@ class RoomUsageList
     {
         this._roomList = [];
         
-        //for (let a = 0; a <= RoomUsage.length; )
-        //this._roomList.push(new RoomUsage(roomNumber, address, lightsOn, heatingCoolingOn, seatsUsed, seatsTotal, timeChecked));
     }
     
     addRoomUsage(roomUsageInstance)
     {
-        this._roomList.push(roomUsageInstance);
+        (this._roomList).push(roomUsageInstance);
         
-        return this._roomList;
+    }
+    
+    initialiseFromRoomListPDO(roomUsageListObject){
+        
+        this._roomList = roomUsageListObject._roomList;
+        
+        for(let i = 0; i < (this._roomList).length; i++){
+            var roomUsage = new RoomUsage();
+            roomUsage.initialiseFromRoomPDO(this._roomList[i]);
+            this._roomList = roomUsage;
+        }
     }
 
 }
+
 
 const STORAGE_KEY = 'ENG1003 - RoomUseList'
 let roomUsageInstanceList = new RoomUsageList();
@@ -43,19 +64,25 @@ function storeRoomUsage(roomUsageInstanceList){
         
         let lst = JSON.stringify(roomUsageInstanceList)
         window.localStorage.setItem(STORAGE_KEY,lst);
-        
+                
     }
     else{
         console.log("Error: localStorage is not supported by current browser.");
         
     }
+    
 }
     
 
 function retrieveRoomUsage(){
     if (typeof(Storage) !== "undefined"){
         
-        document.getElementById("outputArea").innerHTML = localStorage.getItem(roomUsageInstance);
+        var roomUsageObj = JSON.parse(localStorage.getItem(STORAGE_KEY));
+        
+        roomUsageInstanceList = new RoomUsageList();
+        roomUsageInstanceList.initialiseFromRoomListPDO(roomUsageObj);
+        
+        console.log(roomUsageInstanceList);
 
     }
     else{
@@ -65,3 +92,4 @@ function retrieveRoomUsage(){
     
     
 }
+
