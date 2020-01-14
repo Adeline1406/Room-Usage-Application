@@ -13,6 +13,29 @@ class RoomUsage
         this._timeChecked = timeChecked;
         
     }
+    
+    getRoomNumber(){
+        return this._roomNumber;
+    }
+    getAddress(){
+        return this._address;
+    }
+    getLightsOn(){
+        return this._lightsOn;
+    }
+    getHeatingCoolingOn(){
+        return this._heatingCoolingOn;
+    }
+    getSeatsUsed(){
+        return this._seatsUsed;
+    }
+    getSeatsTotal(){
+        return this._seatsTotal;
+    }
+    
+    getTime(){
+        return this._timeChecked;
+    }
 
 }
 
@@ -22,8 +45,7 @@ class RoomUsageList
     {
         this._roomList = [];
         
-        //for (let a = 0; a <= RoomUsage.length; )
-        //this._roomList.push(new RoomUsage(roomNumber, address, lightsOn, heatingCoolingOn, seatsUsed, seatsTotal, timeChecked));
+
     }
     
     addRoomUsage(roomUsageInstance)
@@ -31,6 +53,10 @@ class RoomUsageList
         this._roomList.push(roomUsageInstance);
         
         return this._roomList;
+    }
+    
+    aggregateBy(propname, obj){
+        this._roomList[propname].push(obj)
     }
 
 }
