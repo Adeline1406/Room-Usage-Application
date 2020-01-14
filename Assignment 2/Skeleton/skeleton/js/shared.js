@@ -14,7 +14,6 @@ class RoomUsage
         
     }
     
-<<<<<<< HEAD
     initialiseFromRoomPDO(roomUsageObject){
         
         this._roomNumber = roomUsageObject._roomNumber;
@@ -24,8 +23,8 @@ class RoomUsage
         this._seatsUsed = roomUsageObject._seatsUsed;
         this._seatsTotal = roomUsageObject._seatsTotal;
         this._timeChecked = roomUsageObject._timeChecked;
-        
-=======
+    }
+    
     getRoomNumber(){
         return this._roomNumber;
     }
@@ -47,7 +46,6 @@ class RoomUsage
     
     getTime(){
         return this._timeChecked;
->>>>>>> master
     }
 
 }
@@ -58,10 +56,6 @@ class RoomUsageList
     {
         this._roomList = [];
         
-<<<<<<< HEAD
-=======
-
->>>>>>> master
     }
     
     addRoomUsage(roomUsageInstance)
