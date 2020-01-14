@@ -56,4 +56,6 @@ function showObservations(roomUsageInstance){
     content.innerHTML += newObservation;
 }
 
-
+function searchObservations() {
+    
+}
