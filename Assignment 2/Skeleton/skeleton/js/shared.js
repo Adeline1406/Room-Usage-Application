@@ -14,6 +14,7 @@ class RoomUsage
         
     }
     
+<<<<<<< HEAD
     initialiseFromRoomPDO(roomUsageObject){
         
         this._roomNumber = roomUsageObject._roomNumber;
@@ -24,6 +25,29 @@ class RoomUsage
         this._seatsTotal = roomUsageObject._seatsTotal;
         this._timeChecked = roomUsageObject._timeChecked;
         
+=======
+    getRoomNumber(){
+        return this._roomNumber;
+    }
+    getAddress(){
+        return this._address;
+    }
+    getLightsOn(){
+        return this._lightsOn;
+    }
+    getHeatingCoolingOn(){
+        return this._heatingCoolingOn;
+    }
+    getSeatsUsed(){
+        return this._seatsUsed;
+    }
+    getSeatsTotal(){
+        return this._seatsTotal;
+    }
+    
+    getTime(){
+        return this._timeChecked;
+>>>>>>> master
     }
 
 }
@@ -34,6 +58,10 @@ class RoomUsageList
     {
         this._roomList = [];
         
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
     }
     
     addRoomUsage(roomUsageInstance)
@@ -51,6 +79,10 @@ class RoomUsageList
             roomUsage.initialiseFromRoomPDO(this._roomList[i]);
             this._roomList = roomUsage;
         }
+    }
+    
+    aggregateBy(propname, obj){
+        this._roomList[propname].push(obj)
     }
 
 }
