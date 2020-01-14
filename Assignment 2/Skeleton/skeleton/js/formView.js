@@ -125,7 +125,7 @@ function posSuccess(userPosition) {
 
 
 function posError(userError) {
-    console.log("There is an error with getCurrentPosition()!")
+    console.log("There is an error with getAddressCheck()!")
 }
 
 function getAddressCheck(){
