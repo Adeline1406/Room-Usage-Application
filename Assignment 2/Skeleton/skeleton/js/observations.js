@@ -5,7 +5,7 @@ var roomUsageListStorage = retrieveRoomUsage();
 
 for (let index = 0; index < roomUsageListStorage.length ; index++){
     roomUsageListStorage.roomUsageInstance(index).decodeJSONTimeChecked();
-    showObservations(roomUsageListStorage.getRoomUsageInstance(index));
+    showObservations(roomUsageListStorage.roomUsageInstance(index));
 }
 console.log(roomUsageListStorage);
 
