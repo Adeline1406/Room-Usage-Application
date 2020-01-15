@@ -16,7 +16,7 @@ if (roomUsageListStorage !== null) {
 
 
 
-function showObservations(roomUsageInstance){
+function showObservations(roomUsageInstance, remove = null){
     //convert the time into a string
     
     let time = roomUsageInstance.timeChecked;
@@ -55,20 +55,29 @@ function showObservations(roomUsageInstance){
             "Heating/cooling: "+ heatCoolOnOff+"<br />"+
             "Seat usage: " + roomUsageInstance.seatsUsed + " / "+ roomUsageInstance.seatsTotal+ "<br/ >"+
         "<button class=\"mdl-button mdl-js-button mdl-button--icon\" onclick=\"deleteObservationAtIndex(237);\"><i class=\"material-icons\">delete</i></button></td></tr></tbody></table></div>";
-
     let content = document.getElementById("content");
     content.innerHTML += newObservation;
+
+    
 }
 
 function searchObservations() {
     let searchVal = document.getElementById("searchField").value
     searchVal = searchVal.toLowerCase()
-    let searchResults = roomUsageListStorage
-    for (let index = 0; index < searchResults.arrayLength; index++) {
-        let addressCheck = searchResults.roomUsageInstance(index).buildingAddress
-        let roomNum = searchResults.roomUsageInstance(index).roomNumber
-        if (addressCheck.includes(searchVal) === false || roomNum.includes(searchVal) === false) {
-            
+    let searchResults = []
+    for (let index = 0; index < roomUsageListStorage.arrayLength; index++) {
+        let currentObj = roomUsageListStorage._roomList[index]
+        let addressCheck = currentObj.buildingAddress.toLowerCase()
+        let roomNum = currentObj.roomNumber.toLowerCase()
+        
+        if (addressCheck.includes(searchVal) === false && roomNum.includes(searchVal) === false) {
+            searchResults.push(currentObj)
         }
     }
+    
+    for (let index = 0; index < searchResults.length; index++) {
+        showObservations(searchResults[index], true)
+    }
+    
+    
 }
