@@ -15,9 +15,19 @@ if (roomUsageListStorage !== null) {
 }
 
 //checking if the aggregateBy is working
-//console.log(roomUsageListStorage.aggregateBy(roomUsageInstanceList.hour));
-//console.log(roomUsageListStorage.aggregateBy(roomUsageInstanceList.building));
+let hour = roomUsageListStorage.aggregateBy(roomUsageInstanceList.hour);
+let building = roomUsageListStorage.aggregateBy(roomUsageInstanceList.building);
+console.log(hour)
+for (let prop in hour){
 
+    hour[prop].sortByOccupancy();
+    
+}
+for (let prop in hour){
+
+    hour[prop].occupancy
+    
+}
 
 function showObservations(roomUsageInstance,index){
     //convert the time into a string

@@ -88,6 +88,11 @@ class RoomUsage
     decodeJSONTimeChecked(){
         this._timeChecked = new Date(this._timeChecked);    
     }
+    
+    get occupancy(){
+        let percentage = (this._seatsUsed/this._seatsTotal)* 100
+        return percentage.toFixed(1)
+    }
 
     
     
@@ -142,7 +147,7 @@ class RoomUsageList
     }
     
     aggregateBy(callback){
-        let buckets = {}
+        let buckets = {}           
         for (let index = 0; index < this._roomList.length; index++) {
             let roomUsageInstance = this._roomList[index]
             let key = callback(roomUsageInstance);
@@ -157,6 +162,23 @@ class RoomUsageList
     get arrayLength(){
         return this._roomList.length;
     }
+    
+    sortByOccupancy(){
+        for (let i = 0; i < this._roomList.length - 1; ++i){
+         var minIndex = i;
+         for (let j = i + 1; j < this._roomList.length; ++j){
+             if (this._roomList[j].occupancy < this._roomList[minIndex].occupancy){
+                 minIndex = j;
+             }
+         }
+         if (minIndex != i){
+             var temp = this._roomList[i];
+             this._roomList[i] = this._roomList[minIndex];
+             this._roomList[minIndex] = temp;
+         }
+     }
+    }
+    
     
 
 }

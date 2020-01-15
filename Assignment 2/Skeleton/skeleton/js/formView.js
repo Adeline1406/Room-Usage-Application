@@ -58,13 +58,13 @@ function saveForm(){
         error += "Heating, ";
     }
     
-    if (typeof(seatsUsed)==="number" && seatsUsed > 0 && seatsUsed <= seatsTotal){
+    if (typeof(seatsUsed)==="number" && seatsUsed >= 0 && seatsUsed <= seatsTotal){
         var chkSeatsUsed = seatsUsed;
     }
     else {
         error += "Number of seats in use, ";
     }
-    if(typeof(seatsTotal) === "number" && seatsTotal > 0){
+    if(typeof(seatsTotal) === "number" && seatsTotal >= 0){
         var chkSeatsTotal = seatsTotal;
     }
     else {
