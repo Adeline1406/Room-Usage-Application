@@ -48,7 +48,7 @@ function showObservations(roomUsageInstance){
 
     let newObservation =
         "<div class=\"mdl-cell mdl-cell--4-col\"><table class=\"observation-table mdl-data-table mdl-js-data-table mdl-shadow--2dp\"><thead><tr><th class=\"mdl-data-table__cell--non-numeric\"><h4 class=\"date\">" + dateString + "</h4><h4>" + 
-            roomUsageInstance.address+"<br />"+ 
+            roomUsageInstance.buildingAddress+"<br />"+ 
             "Rm "+ roomUsageInstance.roomNumber+ "</h4></th></tr></thead><tbody><tr><td class=\"mdl-data-table__cell--non-numeric\">"+
             "Time: "+ timeString +"<br />"+
             "Lights: " + lightsOnOff + "<br />"+
