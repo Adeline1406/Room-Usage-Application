@@ -109,6 +109,11 @@ class RoomUsageList
         
     }
     
+    removeRoomUsage(index){
+        
+        this._roomList.splice(index,1);
+    }
+    
     initialiseFromRoomListPDO(roomUsageListObject){
         
         this._roomList = roomUsageListObject._roomList;
@@ -124,12 +129,6 @@ class RoomUsageList
     roomUsageInstance(index){
         return this._roomList[index];
     }
-    
-    /*
-    aggregateBy(propname, obj){
-        this._roomList[propname].push(obj);
-    }
-    */
     
     hour(roomUsageInstance){
         let hours = roomUsageInstance.time
@@ -158,6 +157,7 @@ class RoomUsageList
     get arrayLength(){
         return this._roomList.length;
     }
+    
 
 }
 
