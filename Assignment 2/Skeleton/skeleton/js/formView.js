@@ -95,7 +95,7 @@ function posSuccess(userPosition) {
     let requestURL = apiURL
     + apiKey
     + "&q=" + encodeURIComponent(latitude + "," + longitude)
-    + "&pretty=1&no_annotations=1"
+    + "&pretty=1&no_annotations=1&callback"
     
     // If we have time, update to use jsonp
     let newRequest = new XMLHttpRequest();

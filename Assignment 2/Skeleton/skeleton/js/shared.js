@@ -1,5 +1,6 @@
 "use strict";
 
+
 class RoomUsage
 {
     constructor(roomNumber, address, lightsOn, heatingCoolingOn, seatsUsed, seatsTotal, timeChecked) {
@@ -103,8 +104,10 @@ class RoomUsageList
         for(let i = 0; i < (this._roomList).length; i++){
             var roomUsage = new RoomUsage();
             roomUsage.initialiseFromRoomPDO(this._roomList[i]);
-            this._roomList[i] = roomUsage;
+            roomUsage.address = trimAddress(roomUsage.address)
+            this._roomList[i] = roomUsage;    
         }
+        
     }
     
     roomUsageInstance(index){
