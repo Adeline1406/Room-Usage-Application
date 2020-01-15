@@ -141,10 +141,19 @@ function storeRoomUsage(roomUsageInstanceList){
     }
     
 }
+
+function testData(){
+    var roomUsageObj = JSON.parse(localStorage.getItem(testData));
+    let newList = new RoomUsageList();
+    newList.initialiseFromRoomListPDO(roomUsageObj);
+    console.log(newList);
+    return newList;
+}
     
 
 function retrieveRoomUsage(){
     if (typeof(Storage) !== "undefined"){
+        
         
         var roomUsageObj = JSON.parse(localStorage.getItem(STORAGE_KEY));
         

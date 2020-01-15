@@ -1,7 +1,10 @@
 
 //Retrieve  the data of roomUsageList from storage
-var roomUsageListStorage = retrieveRoomUsage();
+
+//var roomUsageListStorage = retrieveRoomUsage();
+var roomUsageListStorage = testData();
 console.log(roomUsageListStorage);
+
 
 if (roomUsageListStorage !== null) {
     for (let index = 0; index < roomUsageListStorage.arrayLength ; index++) {
