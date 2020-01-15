@@ -182,6 +182,8 @@ function storeRoomUsage(roomUsageInstanceList){
 }
 
 function testDataFunc(){
+    let myData = testDataReturn()
+    storeRoomUsage(myData)
     var roomUsageObj = JSON.parse(localStorage.getItem(STORAGE_KEY));
     let newList = new RoomUsageList();
     newList.initialiseFromRoomListPDO(roomUsageObj);
