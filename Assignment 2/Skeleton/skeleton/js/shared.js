@@ -73,6 +73,15 @@ class RoomUsage
     get timeChecked(){
         return this._timeChecked;
     }
+    get time(){
+        let hours = this._timeChecked.getHours();
+        let amOrPm = " am";
+        if ( hours > 12){
+            hours -= 12;
+            amOrPm = " pm";
+        }
+        return hours;
+    }
     get buildingAddress(){
         return this._address.substring(0, this._address.indexOf(","));
     }
@@ -116,8 +125,35 @@ class RoomUsageList
         return this._roomList[index];
     }
     
+    /*
     aggregateBy(propname, obj){
         this._roomList[propname].push(obj);
+    }
+    */
+    
+    hour(roomUsageInstance){
+        let hours = roomUsageInstance.time
+        return hours;
+    }
+    
+    building(roomUsageInstance){
+        let address = roomUsageInstance.address
+        let building = address.substring(0, address.indexOf(','));
+        return building;
+    }
+    
+    aggregateBy(callback){
+        this._buckets = {}
+        for (let index = 0; index < this._roomList.length; index++) {
+            let roomUsageInstance = this._roomList[index]
+            let key = callback(roomUsageInstance);
+            
+            if (typeof(buckets[key]) === "undefined"){
+                buckets[key] = new RoomUsageList();
+            }
+            buckets[key].addRoomUsage(roomUsageInstance)
+        }
+        return this._buckets;
     }
     
     get arrayLength(){
