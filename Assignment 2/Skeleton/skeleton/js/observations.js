@@ -14,6 +14,9 @@ if (roomUsageListStorage !== null) {
     console.log("roomUsageListStorage is null!")
 }
 
+//checking if the aggregateBy is working
+//console.log(roomUsageListStorage.aggregateBy(roomUsageInstanceList.hour));
+//console.log(roomUsageListStorage.aggregateBy(roomUsageInstanceList.building));
 
 
 function showObservations(roomUsageInstance){
