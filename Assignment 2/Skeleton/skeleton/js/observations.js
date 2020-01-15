@@ -48,7 +48,7 @@ function showObservations(roomUsageInstance){
 
     let newObservation =
         "<div class=\"mdl-cell mdl-cell--4-col\"><table class=\"observation-table mdl-data-table mdl-js-data-table mdl-shadow--2dp\"><thead><tr><th class=\"mdl-data-table__cell--non-numeric\"><h4 class=\"date\">" + dateString + "</h4><h4>" + 
-            roomUsageInstance.buildingAddress+"<br />"+ 
+            roomUsageInstance.buildingAddress +"<br />"+ 
             "Rm "+ roomUsageInstance.roomNumber+ "</h4></th></tr></thead><tbody><tr><td class=\"mdl-data-table__cell--non-numeric\">"+
             "Time: "+ timeString +"<br />"+
             "Lights: " + lightsOnOff + "<br />"+
@@ -64,9 +64,11 @@ function searchObservations() {
     let searchVal = document.getElementById("searchField").value
     searchVal = searchVal.toLowerCase()
     let searchResults = roomUsageListStorage
-    for (let index = 200; index < searchResults.arrayLength; index++) {
+    for (let index = 0; index < searchResults.arrayLength; index++) {
         let addressCheck = searchResults.roomUsageInstance(index).buildingAddress
         let roomNum = searchResults.roomUsageInstance(index).roomNumber
-        
+        if (addressCheck.includes(searchVal) === false || roomNum.includes(searchVal) === false) {
+            
+        }
     }
 }
