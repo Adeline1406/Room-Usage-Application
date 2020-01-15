@@ -16,7 +16,7 @@ if (roomUsageListStorage !== null) {
 
 
 
-function showObservations(roomUsageInstance, remove = null){
+function showObservations(roomUsageInstance){
     //convert the time into a string
     
     let time = roomUsageInstance.timeChecked;
@@ -56,14 +56,16 @@ function showObservations(roomUsageInstance, remove = null){
             "Seat usage: " + roomUsageInstance.seatsUsed + " / "+ roomUsageInstance.seatsTotal+ "<br/ >"+
 <<<<<<< Updated upstream
         "<button class=\"mdl-button mdl-js-button mdl-button--icon\" onclick=\"deleteObservationAtIndex(237);\"><i class=\"material-icons\">delete</i></button></td></tr></tbody></table></div>";
+<<<<<<< HEAD
 =======
         "<button class=\"mdl-button mdl-js-button mdl-button--icon\" onclick=\"deleteObservation();\"><i class=\"material-icons\">delete</i></button></td></tr></tbody></table></div>";
 
 >>>>>>> Stashed changes
+=======
+
+>>>>>>> master
     let content = document.getElementById("content");
     content.innerHTML += newObservation;
-
-    
 }
 
 function searchObservations() {
@@ -80,11 +82,11 @@ function searchObservations() {
         }
     }
     
+    let content = document.getElementById("content");
+    content.innerHTML = "";
     for (let index = 0; index < searchResults.length; index++) {
-        showObservations(searchResults[index], true)
+        showObservations(searchResults[index])
     }
-    
-    
 }
 
 function deleteObservation() {
