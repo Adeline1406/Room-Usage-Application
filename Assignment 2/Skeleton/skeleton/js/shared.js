@@ -125,6 +125,10 @@ class RoomUsageList
 const STORAGE_KEY = 'ENG1003 - RoomUseList'
 let roomUsageInstanceList = new RoomUsageList();
 
+function trimAddress(address) {
+    return address.substring(0, address.indexOf(","))
+}
+
 function storeRoomUsage(roomUsageInstanceList){
     if (typeof(Storage) !== "undefined"){
         

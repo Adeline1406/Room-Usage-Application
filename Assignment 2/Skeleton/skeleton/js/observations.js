@@ -45,12 +45,10 @@ function showObservations(roomUsageInstance){
     
     if (heatCool === true){heatCoolOnOff= "On";}
     else {heatCoolOnOff = "Off";}
-    
-    let cutAddress = roomUsageInstance.address.substring(0, roomUsageInstance.address.indexOf(","))
 
     let newObservation =
         "<div class=\"mdl-cell mdl-cell--4-col\"><table class=\"observation-table mdl-data-table mdl-js-data-table mdl-shadow--2dp\"><thead><tr><th class=\"mdl-data-table__cell--non-numeric\"><h4 class=\"date\">" + dateString + "</h4><h4>" + 
-            cutAddress+"<br />"+ 
+            trimAddress(roomUsageInstance.address)+"<br />"+ 
             "Rm "+ roomUsageInstance.roomNumber+ "</h4></th></tr></thead><tbody><tr><td class=\"mdl-data-table__cell--non-numeric\">"+
             "Time: "+ timeString +"<br />"+
             "Lights: " + lightsOnOff + "<br />"+
@@ -65,6 +63,8 @@ function showObservations(roomUsageInstance){
 function searchObservations() {
     let searchVal = document.getElementById("searchField").value
     searchVal = searchVal.toLowerCase()
-    let searchResults = new RoomUsageList()
-    console.log(searchResults)
+    let searchResults = roomUsageListStorage
+    for (let index = 150; index < searchResults.arrayLength; index++) {
+        console.log(searchResults.roomUsageInstance(index))
+    }
 }
