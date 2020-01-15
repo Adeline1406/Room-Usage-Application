@@ -3,7 +3,6 @@
 
 //var roomUsageListStorage = retrieveRoomUsage();
 var roomUsageListStorage = testDataFunc();
-console.log(roomUsageListStorage);
 
 
 if (roomUsageListStorage !== null) {
@@ -46,11 +45,12 @@ function showObservations(roomUsageInstance){
     
     if (heatCool === true){heatCoolOnOff= "On";}
     else {heatCoolOnOff = "Off";}
-
+    
+    let cutAddress = roomUsageInstance.address.substring(0, roomUsageInstance.address.indexOf(","))
 
     let newObservation =
         "<div class=\"mdl-cell mdl-cell--4-col\"><table class=\"observation-table mdl-data-table mdl-js-data-table mdl-shadow--2dp\"><thead><tr><th class=\"mdl-data-table__cell--non-numeric\"><h4 class=\"date\">" + dateString + "</h4><h4>" + 
-            roomUsageInstance.address+"<br />"+ 
+            cutAddress+"<br />"+ 
             "Rm "+ roomUsageInstance.roomNumber+ "</h4></th></tr></thead><tbody><tr><td class=\"mdl-data-table__cell--non-numeric\">"+
             "Time: "+ timeString +"<br />"+
             "Lights: " + lightsOnOff + "<br />"+

@@ -100,8 +100,6 @@ class RoomUsageList
         
         this._roomList = roomUsageListObject._roomList;
         
-        console.log((this._roomList).length)
-        
         for(let i = 0; i < (this._roomList).length; i++){
             var roomUsage = new RoomUsage();
             roomUsage.initialiseFromRoomPDO(this._roomList[i]);
@@ -143,12 +141,9 @@ function storeRoomUsage(roomUsageInstanceList){
 }
 function testDataFunc(){
     let myData = testDataReturn()
-    console.log(myData)
-    storeRoomUsage(myData)
     var roomUsageObj = JSON.parse(localStorage.getItem(STORAGE_KEY));
     let newList = new RoomUsageList();
     newList.initialiseFromRoomListPDO(roomUsageObj);
-    console.log(newList);
     return newList;
 }
     
