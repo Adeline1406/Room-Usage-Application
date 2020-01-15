@@ -8,7 +8,7 @@ var roomUsageListStorage = testDataFunc();
 if (roomUsageListStorage !== null) {
     for (let index = 0; index < roomUsageListStorage.arrayLength ; index++) {
         roomUsageListStorage.roomUsageInstance(index).decodeJSONTimeChecked();
-        showObservations(roomUsageListStorage.roomUsageInstance(index));
+        showObservations(roomUsageListStorage.roomUsageInstance(index),index);
     }
 } else {
     console.log("roomUsageListStorage is null!")
@@ -16,7 +16,7 @@ if (roomUsageListStorage !== null) {
 
 
 
-function showObservations(roomUsageInstance){
+function showObservations(roomUsageInstance,index){
     //convert the time into a string
     
     let time = roomUsageInstance.timeChecked;
@@ -54,16 +54,10 @@ function showObservations(roomUsageInstance){
             "Lights: " + lightsOnOff + "<br />"+
             "Heating/cooling: "+ heatCoolOnOff+"<br />"+
             "Seat usage: " + roomUsageInstance.seatsUsed + " / "+ roomUsageInstance.seatsTotal+ "<br/ >"+
-<<<<<<< Updated upstream
-        "<button class=\"mdl-button mdl-js-button mdl-button--icon\" onclick=\"deleteObservationAtIndex(237);\"><i class=\"material-icons\">delete</i></button></td></tr></tbody></table></div>";
-<<<<<<< HEAD
-=======
-        "<button class=\"mdl-button mdl-js-button mdl-button--icon\" onclick=\"deleteObservation();\"><i class=\"material-icons\">delete</i></button></td></tr></tbody></table></div>";
 
->>>>>>> Stashed changes
-=======
+        "<button class=\"mdl-button mdl-js-button mdl-button--icon\" onclick=\"deleteObservation("+index+");\"><i class=\"material-icons\">delete</i></button></td></tr></tbody></table></div>";
 
->>>>>>> master
+
     let content = document.getElementById("content");
     content.innerHTML += newObservation;
 }
@@ -71,25 +65,30 @@ function showObservations(roomUsageInstance){
 function searchObservations() {
     let searchVal = document.getElementById("searchField").value
     searchVal = searchVal.toLowerCase()
-    let searchResults = []
+        
+    let content = document.getElementById("content");
+    content.innerHTML = "";
+    
     for (let index = 0; index < roomUsageListStorage.arrayLength; index++) {
         let currentObj = roomUsageListStorage._roomList[index]
         let addressCheck = currentObj.buildingAddress.toLowerCase()
         let roomNum = currentObj.roomNumber.toLowerCase()
         
         if (addressCheck.includes(searchVal) === true || roomNum.includes(searchVal) === true) {
-            searchResults.push(currentObj)
+            showObservations(currentObj ,index)
         }
-    }
-    
-    let content = document.getElementById("content");
-    content.innerHTML = "";
-    for (let index = 0; index < searchResults.length; index++) {
-        showObservations(searchResults[index])
     }
 }
 
-function deleteObservation() {
+function deleteObservation(index) {
+        
+    roomUsageListStorage.removeRoomUsage(index);
+        
+    let content = document.getElementById("content");
+    content.innerHTML = "";
     
+    for (let index = 0; index < roomUsageListStorage.arrayLength; index++) {
+        showObservations(roomUsageListStorage.roomUsageInstance(index),index);
+    }
     
 }
