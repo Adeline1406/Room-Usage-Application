@@ -144,6 +144,7 @@ function storeRoomUsage(roomUsageInstanceList){
     }
     
 }
+
 function testDataFunc(){
     let myData = testDataReturn()
     var roomUsageObj = JSON.parse(localStorage.getItem(STORAGE_KEY));
