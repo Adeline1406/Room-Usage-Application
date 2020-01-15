@@ -60,5 +60,8 @@ function showObservations(roomUsageInstance){
 }
 
 function searchObservations() {
-    
+    let searchVal = document.getElementById("searchField").value
+    searchVal = searchVal.toLowerCase()
+    let searchResults = new RoomUsageList()
+    console.log(searchResults)
 }
