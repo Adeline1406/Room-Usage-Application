@@ -77,7 +77,7 @@ function searchObservations() {
         let addressCheck = currentObj.buildingAddress.toLowerCase()
         let roomNum = currentObj.roomNumber.toLowerCase()
         
-        if (addressCheck.includes(searchVal) === false && roomNum.includes(searchVal) === false) {
+        if (addressCheck.includes(searchVal) === true || roomNum.includes(searchVal) === true) {
             searchResults.push(currentObj)
         }
     }
