@@ -2,7 +2,7 @@
 //Retrieve  the data of roomUsageList from storage
 
 //var roomUsageListStorage = retrieveRoomUsage();
-var roomUsageListStorage = testData();
+var roomUsageListStorage = testDataFunc();
 console.log(roomUsageListStorage);
 
 
