@@ -1,13 +1,13 @@
-//Example for class, should be connected to the RoomUsageList
 
-var timeNow = new Date();
+//Retrieve  the data of roomUsageList from storage
+var roomUsageListStorage = retrieveRoomUsage();
 
 
-var exampleRoom = new RoomUsage (111, "Clayton", true, true, 2, 10, timeNow);
-
-console.log(exampleRoom);
-showObservations(exampleRoom);
-
+for (let index = 0; index < roomUsageListStorage.length() ; index++){
+    roomUsageListStorage.getRoomUsageInstance(index).decodeJSONTime();
+    showObservations(roomUsageListStorage.getRoomUsageInstance(index));
+}
+console.log(roomUsageListStorage);
 
 function showObservations(roomUsageInstance){
     //convert the time into a string

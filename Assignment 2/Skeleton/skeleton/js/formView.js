@@ -76,6 +76,7 @@ function saveForm(){
         let newRoomUsage = new RoomUsage(chkRoomNumber, chkAddress, chkLightsOn, chkHeatingCoolingOn, chkSeatsUsed, chkSeatsTotal, timeChecked);
         
         roomUsageInstanceList.addRoomUsage(newRoomUsage);
+        //console.log(roomUsageInstanceList);
         
         storeRoomUsage(roomUsageInstanceList);
         

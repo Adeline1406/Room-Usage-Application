@@ -11,68 +11,47 @@ class RoomUsage
         this._seatsUsed = seatsUsed;
         this._seatsTotal = seatsTotal;
         this._timeChecked = timeChecked;
-        
     }
     
     initialiseFromRoomPDO(roomUsageObject){
         
-        this.roomNumber = roomUsageObject._roomNumber;
-        this.address = roomUsageObject._address;
-        this.lightsOn = roomUsageObject._lightsOn;
-        this.heatingCoolingOn = roomUsageObject._heatingCoolingOn;
-        this.seatsUsed = roomUsageObject._seatsUsed;
-        this.seatsTotal = roomUsageObject._seatsTotal;
-        this.timeChecked = roomUsageObject._timeChecked;
+        this._roomNumber = roomUsageObject._roomNumber;
+        this._address = roomUsageObject._address;
+        this._lightsOn = roomUsageObject._lightsOn;
+        this._heatingCoolingOn = roomUsageObject._heatingCoolingOn;
+        this._seatsUsed = roomUsageObject._seatsUsed;
+        this._seatsTotal = roomUsageObject._seatsTotal;
+        this._timeChecked = roomUsageObject._timeChecked;
     }
     
-    set roomNumber(newValue){
-        this._roomNumber = newValue;
-    }
-    get roomNumber(){
+    
+    getRoomNumber(){
         return this._roomNumber;
     }
-    
-    set address(newValue){
-        this._address = newValue;
-    }
-    get address(){
+    getAddress(){
         return this._address;
     }
-    
-    set lightsOn(newValue){
-        this._lightsOn = newValue;
-    }
-    get lightsOn(){
+    getLightsOn(){
         return this._lightsOn;
     }
-    
-    set heatingCoolingOn(newValue){
-        this._heatingCoolingOn = newValue;
-    }
-    get heatingCoolingOn(){
+    getHeatingCoolingOn(){
         return this._heatingCoolingOn;
     }
-    
-    set seatsUsed(newValue){
-        this._seatsUsed = newValue;
-    }
-    get seatsUsed(){
+    getSeatsUsed(){
         return this._seatsUsed;
     }
-    
-    set seatsTotal(newValue){
-        this._seatsTotal = newValue;
-    }
-    get seatsTotal(){
+    getSeatsTotal(){
         return this._seatsTotal;
     }
-    
-    set timeChecked(newValue){
-        this._timeChecked = newValue;
-    }
-    get timeChecked(){
+    getTime(){
         return this._timeChecked;
     }
+    decodeJSONTime(){
+        this._timeChecked = new Date(this._timeChecked);    
+    }
+    
+    
+    
 
 }
 
@@ -86,8 +65,7 @@ class RoomUsageList
     
     addRoomUsage(roomUsageInstance)
     {
-        
-        this._roomList.push(roomUsageInstance);
+        (this._roomList).push(roomUsageInstance);
         
     }
     
@@ -95,17 +73,23 @@ class RoomUsageList
         
         this._roomList = roomUsageListObject._roomList;
         
-        console.log((this._roomList).length)
-        
         for(let i = 0; i < (this._roomList).length; i++){
             var roomUsage = new RoomUsage();
             roomUsage.initialiseFromRoomPDO(this._roomList[i]);
-            this._roomList = roomUsage;
+            this._roomList[i] = roomUsage;
         }
     }
     
+    getRoomUsageInstance(index){
+        return this._roomList[index];
+    }
+    
     aggregateBy(propname, obj){
-        this._roomList[propname].push(obj)
+        this._roomList[propname].push(obj);
+    }
+    
+    length(){
+        return this._roomList.length;
     }
 
 }
@@ -118,6 +102,7 @@ function storeRoomUsage(roomUsageInstanceList){
     if (typeof(Storage) !== "undefined"){
         
         let lst = JSON.stringify(roomUsageInstanceList)
+        
         window.localStorage.setItem(STORAGE_KEY,lst);
                 
     }
@@ -134,12 +119,10 @@ function retrieveRoomUsage(){
         
         var roomUsageObj = JSON.parse(localStorage.getItem(STORAGE_KEY));
         
-        console.log(roomUsageObj);
+        roomUsageInstanceList = new RoomUsageList();
+        roomUsageInstanceList.initialiseFromRoomListPDO(roomUsageObj);
         
-        let newList = new RoomUsageList();
-        newList.initialiseFromRoomListPDO(roomUsageObj);
-        
-        console.log(newList);
+        return roomUsageInstanceList;
 
     }
     else{
