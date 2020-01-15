@@ -22,7 +22,7 @@ function showObservations(roomUsageInstance, remove = null){
     let time = roomUsageInstance.timeChecked;
     let amOrPm = " am";
     let hours = time.getHours();
-    if ( hours > 12){
+    if (hours > 12){
         hours -= 12;
         amOrPm = " pm";
     }
@@ -54,7 +54,12 @@ function showObservations(roomUsageInstance, remove = null){
             "Lights: " + lightsOnOff + "<br />"+
             "Heating/cooling: "+ heatCoolOnOff+"<br />"+
             "Seat usage: " + roomUsageInstance.seatsUsed + " / "+ roomUsageInstance.seatsTotal+ "<br/ >"+
+<<<<<<< Updated upstream
         "<button class=\"mdl-button mdl-js-button mdl-button--icon\" onclick=\"deleteObservationAtIndex(237);\"><i class=\"material-icons\">delete</i></button></td></tr></tbody></table></div>";
+=======
+        "<button class=\"mdl-button mdl-js-button mdl-button--icon\" onclick=\"deleteObservation();\"><i class=\"material-icons\">delete</i></button></td></tr></tbody></table></div>";
+
+>>>>>>> Stashed changes
     let content = document.getElementById("content");
     content.innerHTML += newObservation;
 
@@ -78,6 +83,11 @@ function searchObservations() {
     for (let index = 0; index < searchResults.length; index++) {
         showObservations(searchResults[index], true)
     }
+    
+    
+}
+
+function deleteObservation() {
     
     
 }
