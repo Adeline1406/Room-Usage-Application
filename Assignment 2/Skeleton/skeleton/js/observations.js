@@ -8,34 +8,30 @@ var roomUsageListStorage = testDataFunc();
 if (roomUsageListStorage !== null) {
     for (let index = 0; index < roomUsageListStorage.arrayLength ; index++) {
         roomUsageListStorage.roomUsageInstance(index).decodeJSONTimeChecked();
-        showObservations(roomUsageListStorage.roomUsageInstance(index),index);
+        showObservations(roomUsageListStorage.roomUsageInstance(index));
     }
 } else {
     console.log("roomUsageListStorage is null!")
 }
 
 //checking if the aggregateBy is working
-let hour = roomUsageListStorage.aggregateBy(roomUsageInstanceList.hour);
-let building = roomUsageListStorage.aggregateBy(roomUsageInstanceList.building);
-console.log(hour)
-for (let prop in hour){
+//console.log(roomUsageListStorage.aggregateBy(roomUsageInstanceList.hour));
+//console.log(roomUsageListStorage.aggregateBy(roomUsageInstanceList.building));
 
-    hour[prop].sortByOccupancy();
-    
-}
-for (let prop in hour){
 
-    hour[prop].occupancy
-    
-}
-
-function showObservations(roomUsageInstance,index){
+function showObservations(roomUsageInstance){
     //convert the time into a string
     
     let time = roomUsageInstance.timeChecked;
     let amOrPm = " am";
     let hours = time.getHours();
-    if (hours > 12){
+    if (hours === 0){
+            hours = 12;
+    }
+    else if (hours === 12){
+        amOrPm = " pm";
+    }
+    else if ( hours > 12){
         hours -= 12;
         amOrPm = " pm";
     }
@@ -67,9 +63,7 @@ function showObservations(roomUsageInstance,index){
             "Lights: " + lightsOnOff + "<br />"+
             "Heating/cooling: "+ heatCoolOnOff+"<br />"+
             "Seat usage: " + roomUsageInstance.seatsUsed + " / "+ roomUsageInstance.seatsTotal+ "<br/ >"+
-
-        "<button class=\"mdl-button mdl-js-button mdl-button--icon\" onclick=\"deleteObservation("+index+");\"><i class=\"material-icons\">delete</i></button></td></tr></tbody></table></div>";
-
+        "<button class=\"mdl-button mdl-js-button mdl-button--icon\" onclick=\"deleteObservationAtIndex(237);\"><i class=\"material-icons\">delete</i></button></td></tr></tbody></table></div>";
 
     let content = document.getElementById("content");
     content.innerHTML += newObservation;
@@ -78,30 +72,20 @@ function showObservations(roomUsageInstance,index){
 function searchObservations() {
     let searchVal = document.getElementById("searchField").value
     searchVal = searchVal.toLowerCase()
-        
-    let content = document.getElementById("content");
-    content.innerHTML = "";
-    
+    let searchResults = []
     for (let index = 0; index < roomUsageListStorage.arrayLength; index++) {
         let currentObj = roomUsageListStorage._roomList[index]
         let addressCheck = currentObj.buildingAddress.toLowerCase()
         let roomNum = currentObj.roomNumber.toLowerCase()
         
         if (addressCheck.includes(searchVal) === true || roomNum.includes(searchVal) === true) {
-            showObservations(currentObj ,index)
+            searchResults.push(currentObj)
         }
     }
-}
-
-function deleteObservation(index) {
-        
-    roomUsageListStorage.removeRoomUsage(index);
-        
+    
     let content = document.getElementById("content");
     content.innerHTML = "";
-    
-    for (let index = 0; index < roomUsageListStorage.arrayLength; index++) {
-        showObservations(roomUsageListStorage.roomUsageInstance(index),index);
+    for (let index = 0; index < searchResults.length; index++) {
+        showObservations(searchResults[index])
     }
-    
 }
