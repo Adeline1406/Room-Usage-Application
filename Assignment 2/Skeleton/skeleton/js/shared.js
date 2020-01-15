@@ -117,7 +117,7 @@ class RoomUsageList
         this._roomList[propname].push(obj);
     }
     
-    get length(){
+    get arrayLength(){
         return this._roomList.length;
     }
 
@@ -149,13 +149,21 @@ function retrieveRoomUsage(){
         var roomUsageObj = JSON.parse(localStorage.getItem(STORAGE_KEY));
         
         console.log(roomUsageObj);
+        console.log(STORAGE_KEY)
         
-        let newList = new RoomUsageList();
-        newList.initialiseFromRoomListPDO(roomUsageObj);
+        if (roomUsageObj == null) {
+            console.log("roomUsageObj is null!")
+            return null;
+        } else {
+            let newList = new RoomUsageList();
+            newList.initialiseFromRoomListPDO(roomUsageObj);
+
+            console.log(newList);
+
+            return newList;
+        }
         
-        console.log(newList);
-        
-        return newList;
+
 
     }
     else{

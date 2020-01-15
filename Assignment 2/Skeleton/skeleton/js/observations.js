@@ -1,13 +1,18 @@
 
 //Retrieve  the data of roomUsageList from storage
 var roomUsageListStorage = retrieveRoomUsage();
-
-
-for (let index = 0; index < roomUsageListStorage.length ; index++){
-    roomUsageListStorage.roomUsageInstance(index).decodeJSONTimeChecked();
-    showObservations(roomUsageListStorage.roomUsageInstance(index));
-}
 console.log(roomUsageListStorage);
+
+if (roomUsageListStorage !== null) {
+    for (let index = 0; index < roomUsageListStorage.arrayLength ; index++) {
+        roomUsageListStorage.roomUsageInstance(index).decodeJSONTimeChecked();
+        showObservations(roomUsageListStorage.roomUsageInstance(index));
+    }
+} else {
+    console.log("roomUsageListStorage is null!")
+}
+
+
 
 function showObservations(roomUsageInstance){
     //convert the time into a string
