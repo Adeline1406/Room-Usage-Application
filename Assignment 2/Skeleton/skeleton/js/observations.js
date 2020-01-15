@@ -65,9 +65,8 @@ function searchObservations() {
     searchVal = searchVal.toLowerCase()
     let searchResults = roomUsageListStorage
     for (let index = 200; index < searchResults.arrayLength; index++) {
-        console.log(searchResults)
-        console.log(searchResults.roomUsageInstance(index).address)
-        console.log(searchResults.roomUsageInstance(index).roomNumber)
+        let addressCheck = searchResults.roomUsageInstance(index).buildingAddress
+        let roomNum = searchResults.roomUsageInstance(index).roomNumber
         
     }
 }

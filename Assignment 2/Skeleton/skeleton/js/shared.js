@@ -73,10 +73,13 @@ class RoomUsage
     get timeChecked(){
         return this._timeChecked;
     }
+    get buildingAddress(){
+        return this._address.substring(0, this._address.indexOf(","));
+    }
     decodeJSONTimeChecked(){
         this._timeChecked = new Date(this._timeChecked);    
     }
-    
+
     
     
 
@@ -104,7 +107,6 @@ class RoomUsageList
         for(let i = 0; i < (this._roomList).length; i++){
             var roomUsage = new RoomUsage();
             roomUsage.initialiseFromRoomPDO(this._roomList[i]);
-            roomUsage.address = trimAddress(roomUsage.address)
             this._roomList[i] = roomUsage;    
         }
         
@@ -127,10 +129,6 @@ class RoomUsageList
 
 const STORAGE_KEY = 'ENG1003 - RoomUseList'
 let roomUsageInstanceList = new RoomUsageList();
-
-function trimAddress(address) {
-    return address.substring(0, address.indexOf(","))
-}
 
 function storeRoomUsage(roomUsageInstanceList){
     if (typeof(Storage) !== "undefined"){
