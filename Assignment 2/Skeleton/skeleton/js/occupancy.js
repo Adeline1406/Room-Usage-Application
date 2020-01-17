@@ -35,3 +35,5 @@ function showOccupancy(roomUsageInstance){
 }
 
 showOccupancy();
+
+console.log("hi 2")
