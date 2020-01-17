@@ -21,7 +21,11 @@ let content = document.getElementById("content");
 
 for (let prop in building) {
     let buildingStats = statisticsGenerator(building[prop])
-    let newBuilding = "<div class=\"mdl-cell mdl-cell--4-col\"><table class=\"observation-table mdl-data-table mdl-js-data-table mdl-shadow-                         -2dp\"><thead><tr><th class=\"mdl-data-table__cell--non-numeric\"><h4>" + buildingStats[0] + "</h4></th></tr></thead><tbody><tr><td class=\"mdl-data-table__cell--non-numeric\">" +                                                                             "Number of observations: " + buildingStats[1] + "<br />" +
+    let newBuilding = "<div class=\"mdl-cell mdl-cell--4-col\"><table class=\"observation-table mdl-data-table mdl-js-data-table mdl-shadow--2dp"
+    if (buildingStats[2] > 0) {
+        newBuilding += " mdl-color--red-300"
+    }
+    newBuilding += "\"><thead><tr><th class=\"mdl-data-table__cell--non-numeric\"><h4>" + buildingStats[0] + "</h4></th></tr></thead><tbody><tr><td class=\"mdl-data-table__cell--non-numeric\">" +                                                                             "Number of observations: " + buildingStats[1] + "<br />" +
                       "Wasteful observations: " + buildingStats[2] + "<br />" +
                       "Average seat utilisation: " + buildingStats[3] + "%<br />" +
                       "Average lights utilisation: " + buildingStats[4] + "%<br />" +
