@@ -76,7 +76,13 @@ class RoomUsage
     get time(){
         let hours = this._timeChecked.getHours();
         let amOrPm = " am";
-        if ( hours > 12){
+        if (hours === 0){
+            hours = 12;
+        }
+        else if (hours === 12){
+            amOrPm = " pm";
+        }
+        else if ( hours > 12){
             hours -= 12;
             amOrPm = " pm";
         }
@@ -90,8 +96,8 @@ class RoomUsage
     }
     
     get occupancy(){
-        let percentage = (this._seatsUsed/this._seatsTotal)* 100
-        return percentage.toFixed(1)
+        let percentage = (this._seatsUsed/this._seatsTotal)
+        return percentage
     }
 
     
@@ -147,11 +153,27 @@ class RoomUsageList
     }
     
     aggregateBy(callback){
-        let buckets = {}           
+        let buckets = {}
+        for (let hour = 0 ; hour < 24 ; hour++){
+            let hours = hour
+            let amOrPm = " am";
+            if (hours === 0){
+                hours = 12;
+            }
+            else if (hours === 12){
+                amOrPm = " pm";
+            }
+            else if ( hours > 12){
+                hours -= 12;
+                amOrPm = " pm";
+            }
+            let key = hours + amOrPm;
+            buckets[key] = "";
+        }
         for (let index = 0; index < this._roomList.length; index++) {
             let roomUsageInstance = this._roomList[index]
             let key = callback(roomUsageInstance);
-            if (typeof(buckets[key]) === "undefined"){
+            if (buckets[key] === ""){
                 buckets[key] = new RoomUsageList();
             }
             buckets[key].addRoomUsage(roomUsageInstance)
@@ -165,19 +187,18 @@ class RoomUsageList
     
     sortByOccupancy(){
         for (let i = 0; i < this._roomList.length - 1; ++i){
-         var minIndex = i;
-         for (let j = i + 1; j < this._roomList.length; ++j){
-             if (this._roomList[j].occupancy < this._roomList[minIndex].occupancy){
-                 minIndex = j;
+            var minIndex = i;
+            for (let j = i + 1; j < this._roomList.length; ++j){
+                if (this._roomList[j].occupancy < this._roomList[minIndex].occupancy){
+                     minIndex = j;
+                 }
              }
+            var temp = this._roomList[i];
+            this._roomList[i] = this._roomList[minIndex];
+            this._roomList[minIndex] = temp;
          }
-         if (minIndex != i){
-             var temp = this._roomList[i];
-             this._roomList[i] = this._roomList[minIndex];
-             this._roomList[minIndex] = temp;
-         }
-     }
     }
+    
     
     
 
