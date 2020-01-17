@@ -105,3 +105,5 @@ function deleteObservation(index) {
     }
     
 }
+
+console.log("hi")
