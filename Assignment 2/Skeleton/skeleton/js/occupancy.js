@@ -8,48 +8,31 @@ var roomUsageListStorage = testDataFunc();
 if (roomUsageListStorage !== null) {
     for (let index = 0; index < roomUsageListStorage.arrayLength ; index++) {
         roomUsageListStorage.roomUsageInstance(index).decodeJSONTimeChecked();
+        
+    }
+    let hour = roomUsageListStorage.aggregateBy(roomUsageInstanceList.hour);
+
+    for (let prop in hour){
+        if ( hour[prop] !== ""){
+            hour[prop].sortByOccupancy();
+            showOccupancy(hour[prop], prop);
+        }
+        else {
+            console.log("There is no observation in "+ prop)
+        }
+
     }
 } else {
     console.log("roomUsageListStorage is null!")
-}
-
-
-let hour = roomUsageListStorage.aggregateBy(roomUsageInstanceList.hour);
-
-for (let prop in hour){
-    if ( hour[prop] !== ""){
-        hour[prop].sortByOccupancy();
-        showOccupancy(hour[prop], prop);
-    }
-    else {
-        console.log("There is no observation in "+ prop)
-    }
+    let content = document.getElementById("content");
+    let noObservation = 
+                    "<div class=\"mdl-cell mdl-cell--4-col\"><table class=\"mdl-data-table mdl-js-data-table mdl-shadow--2dp\"><tbody>"+
+                    "<tr><td class=\"mdl-data-table__cell--non-numeric\">" + "No Observation " + "</td></tr></tbody></table></div>";
+    content.innerHTML += noObservation;
     
 }
 
 
-
-/*  
-function selectionSort(array)
-{
-     for (let i = 0; i < array.length - 1; ++i){
-         var minIndex = i;
-         for (let j = i + 1; j < array.length; ++j){
-
-             if (array[j] < array[minIndex]){
-                 minIndex = j;
-             }
-         }
-            
-         if (minIndex != i){
-             var temp = array[i];
-             array[i] = array[minIndex];
-             array[minIndex] = temp;
-         }
-     
-     }
-}
-*/
 
 function showOccupancy(roomUsageList, prop){
     
