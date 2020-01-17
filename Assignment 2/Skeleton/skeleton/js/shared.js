@@ -154,33 +154,17 @@ class RoomUsageList
     
     aggregateBy(callback){
         let buckets = {}
-        for (let hour = 0 ; hour < 24 ; hour++){
-            let hours = hour
-            let amOrPm = " am";
-            if (hours === 0){
-                hours = 12;
-            }
-            else if (hours === 12){
-                amOrPm = " pm";
-            }
-            else if ( hours > 12){
-                hours -= 12;
-                amOrPm = " pm";
-            }
-            let key = hours + amOrPm;
-            buckets[key] = "";
-        }
         for (let index = 0; index < this._roomList.length; index++) {
             let roomUsageInstance = this._roomList[index]
             let key = callback(roomUsageInstance);
-            if (buckets[key] === ""){
+            if (typeof(buckets[key]) === "undefined"){
                 buckets[key] = new RoomUsageList();
             }
             buckets[key].addRoomUsage(roomUsageInstance)
         }
         return buckets;
     }
-    
+
     get arrayLength(){
         return this._roomList.length;
     }
