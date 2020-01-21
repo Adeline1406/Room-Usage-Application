@@ -24,7 +24,7 @@
                       		<i class="material-icons">search</i>
                       	</label>
                       	<div class="mdl-textfield__expandable-holder">
-                      		<input class="mdl-textfield__input" type="text" name="sample" id="searchField" />
+                      		<input class="mdl-textfield__input" type="text" name="sample" id="searchField" oninput="searchObservations()"/>
                       	</div>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                 <div class="mdl-grid" id="content">
 
                     <!-- Example message card.  Use this pattern with different text. -->
-
+                    <!--
                     <div class="mdl-cell mdl-cell--4-col">
                         <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
                             <tbody>
@@ -52,8 +52,8 @@
 
                     <!-- Example observation cards.  You can generate a number of these -->
                     <!-- and add them to the "content element" to show a list of        -->
-                    <!-- observations.  You can display them differently if you like.  -->
-
+                    <!-- observations.  You can display them differently if you like.  -->  
+                    <!--
                     <div class="mdl-cell mdl-cell--4-col">
                         <table class="observation-table mdl-data-table mdl-js-data-table mdl-shadow--2dp">
                             <thead>
@@ -103,11 +103,11 @@
                             </tbody>
                         </table>
                     </div>
-
+                    //-->
                     <!-- End example cards. -->
 
 
-                <div>
+                </div>
             </main>
             <div id="toast" class="mdl-js-snackbar mdl-snackbar">
                 <div class="mdl-snackbar__text"></div>

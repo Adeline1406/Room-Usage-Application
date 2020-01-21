@@ -1,21 +1,41 @@
-//Example for class, should be connected to the RoomUsageList
 
-var timeNow = new Date();
+//Retrieve  the data of roomUsageList from storage
 
-
-var exampleRoom = new RoomUsage (111, "Clayton", true, true, 2, 10, timeNow);
-
-console.log(exampleRoom);
-showObservations(exampleRoom);
+//var roomUsageListStorage = retrieveRoomUsage();
+var roomUsageListStorage = testDataFunc();
 
 
-function showObservations(roomUsageInstance){
+if (roomUsageListStorage !== null) {
+    for (let index = 0; index < roomUsageListStorage.arrayLength ; index++) {
+        roomUsageListStorage.roomUsageInstance(index).decodeJSONTimeChecked();
+        showObservations(roomUsageListStorage.roomUsageInstance(index),index);
+    }
+} else {
+    console.log("roomUsageListStorage is null!")
+}
+
+//checking if the aggregateBy is working
+let hour = roomUsageListStorage.aggregateBy(roomUsageInstanceList.hour);
+let building = roomUsageListStorage.aggregateBy(roomUsageInstanceList.building);
+console.log(hour)
+for (let prop in hour){
+
+    hour[prop].sortByOccupancy();
     
+}
+for (let prop in hour){
+
+    hour[prop].occupancy
+    
+}
+
+function showObservations(roomUsageInstance,index){
     //convert the time into a string
-    let time = roomUsageInstance.getTime()
+    
+    let time = roomUsageInstance.timeChecked;
     let amOrPm = " am";
     let hours = time.getHours();
-    if ( hours > 12){
+    if (hours > 12){
         hours -= 12;
         amOrPm = " pm";
     }
@@ -23,37 +43,67 @@ function showObservations(roomUsageInstance){
     let timeString = hours+":"+ time.getMinutes() +":"+ time.getSeconds() + amOrPm;
     
     //convert the date and the month into a string
-    let month = time.getMonth();
     let monthString = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug", "Sep", "Oct","Nov","Dec"];
-    let date = time.getDate();
-    let dateString = date +" "+ monthString[month];
+    let dateString = time.getDate() +" "+ monthString[time.getMonth()];
     
     
-    let lights = roomUsageInstance.getLightsOn();
+    let lights = roomUsageInstance.lightsOn;
     let lightsOnOff ="";
     
     if (lights === true){lightsOnOff = "On";}
     else {lightsOnOff = "Off";}
     
-    let heatCool= roomUsageInstance.getHeatingCoolingOn();
+    let heatCool= roomUsageInstance.heatingCoolingOn;
     let heatCoolOnOff = "";
     
     if (heatCool === true){heatCoolOnOff= "On";}
     else {heatCoolOnOff = "Off";}
 
-
     let newObservation =
         "<div class=\"mdl-cell mdl-cell--4-col\"><table class=\"observation-table mdl-data-table mdl-js-data-table mdl-shadow--2dp\"><thead><tr><th class=\"mdl-data-table__cell--non-numeric\"><h4 class=\"date\">" + dateString + "</h4><h4>" + 
-            roomUsageInstance.getAddress()+"<br />"+ 
-            "Rm "+ roomUsageInstance.getRoomNumber()+ "</h4></th></tr></thead><tbody><tr><td class=\"mdl-data-table__cell--non-numeric\">"+
+            roomUsageInstance.buildingAddress +"<br />"+ 
+            "Rm "+ roomUsageInstance.roomNumber+ "</h4></th></tr></thead><tbody><tr><td class=\"mdl-data-table__cell--non-numeric\">"+
             "Time: "+ timeString +"<br />"+
             "Lights: " + lightsOnOff + "<br />"+
             "Heating/cooling: "+ heatCoolOnOff+"<br />"+
-            "Seat usage: " + roomUsageInstance.getSeatsUsed() + " / "+ roomUsageInstance.getSeatsTotal()+ "<br/ >"
-        "<button class=\"mdl-button mdl-js-button mdl-button--icon\" onclick=\"deleteObservationAtIndex(237);\"><i class=\"material-icons\">delete</i></button></td></tr></tbody></table></div>";
+            "Seat usage: " + roomUsageInstance.seatsUsed + " / "+ roomUsageInstance.seatsTotal+ "<br/ >"+
+
+        "<button class=\"mdl-button mdl-js-button mdl-button--icon\" onclick=\"deleteObservation("+index+");\"><i class=\"material-icons\">delete</i></button></td></tr></tbody></table></div>";
+
 
     let content = document.getElementById("content");
     content.innerHTML += newObservation;
 }
 
+function searchObservations() {
+    let searchVal = document.getElementById("searchField").value
+    searchVal = searchVal.toLowerCase()
+        
+    let content = document.getElementById("content");
+    content.innerHTML = "";
+    
+    for (let index = 0; index < roomUsageListStorage.arrayLength; index++) {
+        let currentObj = roomUsageListStorage._roomList[index]
+        let addressCheck = currentObj.buildingAddress.toLowerCase()
+        let roomNum = currentObj.roomNumber.toLowerCase()
+        
+        if (addressCheck.includes(searchVal) === true || roomNum.includes(searchVal) === true) {
+            showObservations(currentObj ,index)
+        }
+    }
+}
 
+function deleteObservation(index) {
+        
+    roomUsageListStorage.removeRoomUsage(index);
+        
+    let content = document.getElementById("content");
+    content.innerHTML = "";
+    
+    for (let index = 0; index < roomUsageListStorage.arrayLength; index++) {
+        showObservations(roomUsageListStorage.roomUsageInstance(index),index);
+    }
+    
+}
+
+console.log("hi")

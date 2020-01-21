@@ -58,13 +58,13 @@ function saveForm(){
         error += "Heating, ";
     }
     
-    if (typeof(seatsUsed)==="number" && seatsUsed > 0 && seatsUsed <= seatsTotal){
+    if (typeof(seatsUsed)==="number" && seatsUsed >= 0 && seatsUsed <= seatsTotal){
         var chkSeatsUsed = seatsUsed;
     }
     else {
         error += "Number of seats in use, ";
     }
-    if(typeof(seatsTotal) === "number" && seatsTotal > 0){
+    if(typeof(seatsTotal) === "number" && seatsTotal >= 0){
         var chkSeatsTotal = seatsTotal;
     }
     else {
@@ -96,7 +96,7 @@ function posSuccess(userPosition) {
     let requestURL = apiURL
     + apiKey
     + "&q=" + encodeURIComponent(latitude + "," + longitude)
-    + "&pretty=1&no_annotations=1"
+    + "&pretty=1&no_annotations=1&callback"
     
     // If we have time, update to use jsonp
     let newRequest = new XMLHttpRequest();
@@ -123,7 +123,7 @@ function posSuccess(userPosition) {
 
 
 function posError(userError) {
-    console.log("There is an error with getCurrentPosition()!")
+    console.log("There is an error with getAddressCheck()!")
 }
 
 function getAddressCheck(){
