@@ -1,8 +1,13 @@
 
 //Retrieve  the data of roomUsageList from storage
+if (useTestData === true){
+    var roomUsageListStorage = testDataFunc();
+} else {
+    var roomUsageListStorage = retrieveRoomUsage();
+}
 
-//var roomUsageListStorage = retrieveRoomUsage();
-var roomUsageListStorage = testDataFunc();
+console.log(roomUsageListStorage)
+
 
 
 if (roomUsageListStorage !== null) {

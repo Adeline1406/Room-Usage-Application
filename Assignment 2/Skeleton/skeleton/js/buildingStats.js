@@ -1,5 +1,12 @@
 "use strict";
 
+//Retrieve  the data of roomUsageList from storage
+if (useTestData === true){
+    var roomUsageListStorage = testDataFunc();
+} else {
+    var roomUsageListStorage = retrieveRoomUsage();
+}
+
 function redTable(buildingStat2, shade, classNeeded = false) {
     let returnVal = ""
     if (buildingStat2 > 0) {
@@ -18,10 +25,6 @@ function redTable(buildingStat2, shade, classNeeded = false) {
     }
 }
 
-//Retrieve  the data of roomUsageList from storage
-
-//var roomUsageListStorage = retrieveRoomUsage();
-var roomUsageListStorage = testDataFunc();
 
 
 if (roomUsageListStorage !== null) {
