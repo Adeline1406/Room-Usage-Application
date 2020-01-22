@@ -104,11 +104,8 @@ function posSuccess(userPosition) {
     newRequest.onload = function() {
         if (newRequest.status == 200) {
             let newData = JSON.parse(newRequest.responseText)
-            console.log(newData)
-            console.log(newData.results[0].formatted)
-            console.log(document.getElementById("address"))
             document.getElementById("address").value = newData.results[0].formatted
-            document.getElementById("address")[0] = "" // try to update to remove label in input field
+            console.log(newData)
         } else if (newRequest.status <= 500) {
             console.log("OpenCageData server returned an error! Error code: " + newRequest.status)
             

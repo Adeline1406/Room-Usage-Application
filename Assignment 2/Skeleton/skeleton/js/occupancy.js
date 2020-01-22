@@ -1,10 +1,13 @@
 "use strict";
 //Retrieve  the data of roomUsageList from storage
 
-//var roomUsageListStorage = retrieveRoomUsage();
-var roomUsageListStorage = testDataFunc();
+if (useTestData === true){
+    var roomUsageListStorage = testDataFunc();
+} else {
+    var roomUsageListStorage = retrieveRoomUsage();
+}
 
-
+console.log(roomUsageListStorage)
 if (roomUsageListStorage !== null) {
     for (let index = 0; index < roomUsageListStorage.arrayLength ; index++) {
         roomUsageListStorage.roomUsageInstance(index).decodeJSONTimeChecked();
@@ -92,4 +95,3 @@ function showOccupancy(roomUsageList, prop){
     content.innerHTML += newOccupancy;
 }
 
-showOccupancy();

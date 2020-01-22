@@ -1,5 +1,7 @@
 "use strict";
 
+var useTestData = false;
+// Change this to false if you would like to use your own data!
 
 class RoomUsage
 {
@@ -146,6 +148,7 @@ class RoomUsageList
         return hours;
     }
     
+    
     building(roomUsageInstance){
         let address = roomUsageInstance.address
         let building = address.substring(0, address.indexOf(','));
@@ -218,12 +221,13 @@ function testDataFunc(){
     
 
 function retrieveRoomUsage(){
+    console.log("retrieve room usage here")
+    console.log(typeof(Storage))
     if (typeof(Storage) !== "undefined"){
         
-        
         var roomUsageObj = JSON.parse(localStorage.getItem(STORAGE_KEY));
-        
-        console.log(roomUsageObj);
+        console.log(localStorage)
+        console.log(roomUsageObj)
         console.log(STORAGE_KEY)
         
         if (roomUsageObj == null) {
@@ -234,7 +238,7 @@ function retrieveRoomUsage(){
             newList.initialiseFromRoomListPDO(roomUsageObj);
 
             console.log(newList);
-
+            console.log("end rru")
             return newList;
         }
         
