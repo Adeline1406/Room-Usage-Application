@@ -15,24 +15,31 @@ if (roomUsageListStorage !== null) {
         roomUsageListStorage.roomUsageInstance(index).decodeJSONTimeChecked();
         showObservations(roomUsageListStorage.roomUsageInstance(index),index);
     }
+    
+    //checking if the aggregateBy is working
+    let hour = roomUsageListStorage.aggregateBy(roomUsageInstanceList.hour);
+    let building = roomUsageListStorage.aggregateBy(roomUsageInstanceList.building);
+    console.log(hour)
+    for (let prop in hour){
+
+        hour[prop].sortByOccupancy();
+
+    }
+    for (let prop in hour){
+
+        hour[prop].occupancy
+
+    }
 } else {
     console.log("roomUsageListStorage is null!")
-}
-
-//checking if the aggregateBy is working
-let hour = roomUsageListStorage.aggregateBy(roomUsageInstanceList.hour);
-let building = roomUsageListStorage.aggregateBy(roomUsageInstanceList.building);
-console.log(hour)
-for (let prop in hour){
-
-    hour[prop].sortByOccupancy();
+    let content = document.getElementById("content");
+    let noObservation = 
+                    "<div class=\"mdl-cell mdl-cell--4-col\"><table class=\"mdl-data-table mdl-js-data-table mdl-shadow--2dp\"><tbody>"+
+                    "<tr><td class=\"mdl-data-table__cell--non-numeric\">" + "No Observation " + "</td></tr></tbody></table></div>";
+    content.innerHTML += noObservation;
     
 }
-for (let prop in hour){
 
-    hour[prop].occupancy
-    
-}
 
 function showObservations(roomUsageInstance,index){
     //convert the time into a string
@@ -110,5 +117,3 @@ function deleteObservation(index) {
     }
     
 }
-
-console.log("hi")

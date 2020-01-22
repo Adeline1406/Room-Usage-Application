@@ -1,6 +1,6 @@
 "use strict";
 
-var useTestData = false;
+var useTestData = true;
 // Change this to false if you would like to use your own data!
 
 class RoomUsage
